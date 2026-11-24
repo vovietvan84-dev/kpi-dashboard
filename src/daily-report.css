@@ -1,0 +1,61 @@
+#daily-report{display:grid;gap:18px}
+#daily-report .dr-hero{display:flex;align-items:center;justify-content:space-between;gap:18px;padding:24px 26px;border-radius:18px;background:linear-gradient(120deg,#123b65,#0d7f83);color:#fff;box-shadow:0 16px 34px rgba(16,55,85,.18)}
+#daily-report .dr-hero small{display:block;font-size:10px;font-weight:800;letter-spacing:.15em;color:#a8eee6}
+#daily-report .dr-hero h2{margin:6px 0 5px;font-size:27px;letter-spacing:-.035em}
+#daily-report .dr-hero p{margin:0;color:#d9f3f1;font-size:12px}
+#daily-report .dr-time{text-align:right;min-width:170px}
+#daily-report .dr-time strong{display:block;font-size:28px}
+#daily-report .dr-time span{font-size:11px;color:#d9f3f1}
+#daily-report .dr-tools{display:grid;grid-template-columns:240px 270px 1fr;gap:12px;padding:15px;background:#f4f7fa;border:1px solid #d6e0e9;border-radius:14px}
+#daily-report .dr-tools label{font-size:10px;font-weight:800;color:#526579;text-transform:uppercase;letter-spacing:.07em}
+#daily-report .dr-tools input,#daily-report .dr-tools select{display:block;width:100%;height:42px;margin-top:6px;border:1px solid #c8d5e1;border-radius:10px;background:#fff;padding:0 12px;font:700 13px Manrope;color:#17324d}
+#daily-report .dr-source{align-self:end;padding:10px 13px;border-radius:10px;background:#e7f3f2;color:#286460;font-size:11px;line-height:1.55}
+#daily-report .dr-cards{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
+#daily-report .dr-card{border:1px solid #d6e0e9;background:#fff;border-radius:14px;padding:15px;text-align:left;cursor:pointer;transition:.18s;box-shadow:0 7px 20px rgba(28,52,78,.06)}
+#daily-report .dr-card:hover,#daily-report .dr-card.active{transform:translateY(-2px);border-color:#168b8c;box-shadow:0 12px 28px rgba(15,118,120,.14)}
+#daily-report .dr-card small{display:block;color:#66778a;font-size:9px;font-weight:800;letter-spacing:.05em;text-transform:uppercase}
+#daily-report .dr-card strong{display:block;margin:8px 0 4px;font-size:22px;color:#102e4b}
+#daily-report .dr-card span{font-size:11px;color:#526579}
+#daily-report .dr-card .dr-bar{height:5px;margin-top:10px;border-radius:99px;background:#edf1f5;overflow:hidden}
+#daily-report .dr-card .dr-bar i{display:block;height:100%;background:linear-gradient(90deg,#0aa37f,#16a4bf)}
+#daily-report .dr-panel{background:#fff;border:1px solid #d6e0e9;border-radius:16px;overflow:hidden;box-shadow:0 10px 28px rgba(28,52,78,.07)}
+#daily-report .dr-head{display:flex;align-items:center;justify-content:space-between;gap:15px;padding:17px 19px;border-bottom:1px solid #dde6ee}
+#daily-report .dr-head h3{margin:0;color:#102e4b;font-size:16px}
+#daily-report .dr-head p{margin:4px 0 0;color:#687b8d;font-size:11px}
+#daily-report .dr-pill{padding:6px 10px;border-radius:999px;background:#e8f4f3;color:#14736d;font-size:10px;font-weight:800}
+#daily-report .dr-scroll{overflow:auto;max-height:610px}
+#daily-report table{min-width:1010px}
+#daily-report th{background:#123b65;color:#fff;text-align:center;font-size:10px;top:0}
+#daily-report th:first-child,#daily-report td:first-child{text-align:left}
+#daily-report td{text-align:right;font-variant-numeric:tabular-nums}
+#daily-report td.dr-name{font-weight:800;color:#17324d}
+#daily-report tr.dr-total td{position:sticky;bottom:0;background:#e7f1fb;color:#0d355b;font-weight:900;border-top:2px solid #2b79b9}
+#daily-report .dr-pct{display:inline-flex;min-width:60px;justify-content:center;padding:5px 8px;border-radius:999px;font-weight:900}
+#daily-report .dr-pct.good{background:#d8f4e6;color:#087449}
+#daily-report .dr-pct.watch{background:#fff0cf;color:#9c6300}
+#daily-report .dr-pct.bad{background:#ffe0e4;color:#b31e37}
+#daily-report .dr-empty{padding:52px 22px;text-align:center;color:#697b8c}
+#daily-report .dr-note{padding:13px 17px;background:#f7fafc;color:#637689;font-size:10.5px;line-height:1.65;border-top:1px solid #dde6ee}
+#daily-report .dr-tools-all{grid-template-columns:220px 240px 260px 1fr;align-items:end}
+#daily-report .dr-export{height:42px;border:0;border-radius:10px;background:linear-gradient(135deg,#153f72,#0a8b88);color:#fff;font:800 12px Manrope;cursor:pointer;box-shadow:0 8px 18px rgba(20,84,112,.18)}
+#daily-report .dr-export-template{background:linear-gradient(135deg,#d85c00,#f09b00)}
+#daily-report .dr-template-panel{border-top:4px solid #168fbd}
+#daily-report .dr-template-meta{display:grid;grid-template-columns:repeat(3,minmax(180px,1fr));gap:8px 18px;padding:14px 16px;background:#f4f9fd;border:1px solid #d6e8f3;border-radius:12px;margin:14px}
+#daily-report .dr-template-meta div{display:flex;justify-content:space-between;gap:16px;border-bottom:1px dashed #c4d8e6;padding:7px 4px}
+#daily-report .dr-template-meta span{color:#60758b;font-weight:700}
+#daily-report .dr-template-meta b{color:#083f72;text-align:right}
+#daily-report .dr-template-scroll{max-height:none}
+#daily-report .dr-template-table{min-width:1180px}
+#daily-report .dr-template-table thead tr:first-child th{background:#22aee1;color:#fff;text-align:center}
+#daily-report .dr-template-table thead tr:nth-child(2) th{background:#096b9e;color:#fff}
+#daily-report .dr-template-table tbody td:first-child{font-weight:800;color:#0b3c67}
+#daily-report .dr-template-table tbody tr:nth-child(even){background:#f5f9fc}
+#daily-report .dr-matrix{max-height:none}
+#daily-report .dr-matrix table{min-width:2200px;font-size:9px}
+#daily-report .dr-matrix th{white-space:nowrap;padding:7px 5px;background:#123b65;border-color:#345c80}
+#daily-report .dr-matrix thead tr:first-child th:nth-child(n+3){background:#0d6f78}
+#daily-report .dr-matrix td{white-space:nowrap;padding:6px 5px}
+#daily-report .dr-matrix .dr-pct{min-width:48px;padding:3px 5px;font-size:9px}
+#daily-report .dr-matrix tr.dr-total td{position:static}
+@media(max-width:1000px){#daily-report .dr-cards{grid-template-columns:repeat(2,minmax(0,1fr))}#daily-report .dr-tools{grid-template-columns:1fr 1fr}.dr-source{grid-column:1/-1}}
+@media(max-width:720px){#daily-report .dr-hero{display:block;padding:20px}#daily-report .dr-time{text-align:left;margin-top:15px}#daily-report .dr-tools{grid-template-columns:1fr}#daily-report .dr-source{grid-column:auto}#daily-report .dr-cards{grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}#daily-report .dr-card{padding:12px}#daily-report .dr-card strong{font-size:18px}#daily-report .dr-head{align-items:flex-start;flex-direction:column}#daily-report .dr-template-meta{grid-template-columns:1fr}#daily-report .dr-export-template{width:100%}}
