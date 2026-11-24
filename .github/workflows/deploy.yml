@@ -1,0 +1,61 @@
+name: Cập nhật dashboard
+
+on:
+  push:
+    branches: [main]
+    paths: ['data/**', 'src/**', 'build/**', '.github/workflows/**']
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Đọc file Excel mới (nếu Anh thả .xlsb vào thư mục data)
+        id: xl
+        run: |
+          f=$(ls data/*.xlsb data/*.xlsx data/*.xlsm 2>/dev/null | head -1 || true)
+          echo "file=$f" >> "$GITHUB_OUTPUT"
+          if [ -n "$f" ]; then
+            node --max-old-space-size=6144 build/build.js --xlsb "$f" --out _site
+          else
+            node build/build.js --out _site
+          fi
+
+      - name: Lưu số liệu mới, xoá file Excel gốc khỏi kho
+        if: steps.xl.outputs.file != ''
+        run: |
+          git config user.name "kpi-bot"
+          git config user.email "kpi-bot@users.noreply.github.com"
+          for x in data/*.xlsb data/*.xlsx data/*.xlsm; do if [ -f "$x" ]; then git rm -q "$x"; fi; done
+          git add data/snapshot.json.gz
+          git commit -m "Cập nhật số liệu từ ${{ steps.xl.outputs.file }}" || echo "Không có thay đổi"
+          git push
+
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: _site
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4
