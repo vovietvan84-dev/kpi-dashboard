@@ -191,6 +191,10 @@
 
     // =================== DỰNG CẤU TRÚC ===================
     const kv = (r, c, o = 0) => c >= 0 ? num(r[c + o]) : 0;
+    // Trận Xanh: từ 26/11 khối cột đổi thành CT/TH Nhóm TB, CT/TH Nhóm TB+VIP, TH Nhóm Lẻ… → lấy CT/TH "Nhóm TB, VIP"; file cũ vẫn dùng CT (+0) / TH (+2)
+    const TXO = (() => { if (C.tx < 0) return { ct: 0, th: 2 }; const nx = Object.values(C).filter(v => v > C.tx).reduce((m, v) => Math.min(m, v), C.tx + 12); let ct = -1, th = -1;
+      for (let c = C.tx; c < nx; c++) { const h = str(H2[c]).replace(/\s+/g, ' ').trim(); if (/^CT Nhóm TB, ?VIP/i.test(h)) ct = c - C.tx; if (/^TH Nhóm TB, ?VIP/i.test(h)) th = c - C.tx; }
+      return ct >= 0 && th >= 0 ? { ct, th } : { ct: 0, th: 2 }; })();
     const visitOf = o => o ? o.v : '';
     const team = TEAM;
     const KPIS = [], MBONUS = [], MMONTHLY = [], TREPS = [], TFUND = [], TBON = [], MTNREPS = [], FXREPS = [], FXON = [], FXX = [], FXNB = [], LEROWS = [];
@@ -220,7 +224,7 @@
         position: posOf[code] || '', code, rep: name, team, mcpOff, mcpOn, mcpTotal: mcpTot, mcpActive: kv(r, C.mcp, 3), mcpActiveOff: actOff, mcpActiveOn: actOn,
         target, actual, gap: actual - target, achievement: rt(actual, target), paceGap: rt(actual, target) - prog, dailyNeed: kv(r, C.s, 5),
         activeTarget: kv(r, C.aAll), activeActual: kv(r, C.aAll, 2), activeAchievement: rt(kv(r, C.aAll, 2), kv(r, C.aAll)),
-        teaGreenTarget: kv(r, C.tx), teaGreenActual: kv(r, C.tx, 2), teaGreenAchievement: rt(kv(r, C.tx, 2), kv(r, C.tx)),
+        teaGreenTarget: kv(r, C.tx, TXO.ct), teaGreenActual: kv(r, C.tx, TXO.th), teaGreenAchievement: rt(kv(r, C.tx, TXO.th), kv(r, C.tx, TXO.ct)),
         homeyYellowTarget: kv(r, C.tv), homeyYellowActual: kv(r, C.tv, 2), homeyYellowAchievement: rt(kv(r, C.tv, 2), kv(r, C.tv)),
         pcTarget: kv(r, C.pOff), pcActual: kv(r, C.pOff, 3), pcBc: kv(r, C.pcT, 1), pcAchievement: rt(kv(r, C.pOff, 3), kv(r, C.pOff)),
         pcTotalTarget: kv(r, C.pcT), pcTotalActual: kv(r, C.pcT, 1),
@@ -283,7 +287,7 @@
       FXREPS.push({ name, code, ss: TEAM, row: ri + 5, nOn: mcpOn, nOff: mcpOff, days: fd });
       const n7 = onO.filter(o => ON7.some(t => norm(t) === norm(o.l3) || norm(t) === norm(o.l2))); const pri = onO.filter(o => /quán nước|quốc lộ|thể thao|vận chuyển/i.test(o.l3 + ' ' + o.l2));
       FXON.push({ name, ss: TEAM, n: onO.length, aso: onO.filter(o => bought(o.c)).length, n7: n7.length, aso7: n7.filter(o => bought(o.c)).length, tea7: n7.filter(o => OS[o.c]?.tea > 0).length, teaOn, np: pri.length, asop: pri.filter(o => bought(o.c)).length, pcCt: kv(r, C.pOn), pcTh: kv(r, C.pOn, 3), pcCl: Math.max(0, kv(r, C.pOn) - kv(r, C.pOn, 3)), pcPct: rt(kv(r, C.pOn, 3), kv(r, C.pOn)) });
-      FXX.push({ name, ss: TEAM, asoCt: kv(r, C.tx), asoTh: kv(r, C.tx, 2), chinsu: [0, 0, 0], omc: [0, 0, 0], vip3: [0, 0, 0], vip5: [0, 0, 0] });
+      FXX.push({ name, ss: TEAM, asoCt: kv(r, C.tx, TXO.ct), asoTh: kv(r, C.tx, TXO.th), chinsu: [0, 0, 0], omc: [0, 0, 0], vip3: [0, 0, 0], vip5: [0, 0, 0] });
       const nb = os.filter(o => o.ds3 <= 0); nb.forEach(o => nbList.push({ c: o.c, n: o.n, rep: name, ch: o.ch.toLowerCase(), l2: o.l2, w: o.w, a: o.a, cr: o.cr ? `${o.cr[2]}-${p2(o.cr[1])}-${p2(o.cr[0])}` : '', ty: o.t, tg: o.tg, th: OS[o.c]?.ds || 0, vis: o.v }));
       FXNB.push({ name, ss: TEAM, off: nb.filter(o => o.ch === 'OFF').length, on: nb.filter(o => o.ch === 'ON').length, offBuy: nb.filter(o => o.ch === 'OFF' && bought(o.c)).length, onBuy: nb.filter(o => o.ch === 'ON' && bought(o.c)).length, offMcp: offO.length, onMcp: onO.length });
       // LE
