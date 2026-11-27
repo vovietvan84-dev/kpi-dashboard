@@ -11,6 +11,7 @@
   var fab = document.createElement('div'); fab.className = 'kl-fab';
   fab.innerHTML = '<button class="kl-btn" type="button" id="klLoad">⇪ Nạp file mới</button>' + (window.__kplUploaded ? '<button class="kl-btn alt" type="button" id="klReset">↺ Bản gốc</button>' : '');
   var inp = document.createElement('input'); inp.type = 'file'; inp.accept = '.xlsb,.xlsx,.xlsm'; inp.style.display = 'none';
+  fab.style.display = 'none'; /* Ẩn nút Nạp file mới theo yêu cầu (27/11) — cập nhật số qua GitHub */
   document.body.appendChild(fab); document.body.appendChild(inp);
   function box(html){ var o = document.getElementById('klOv'); if(!o){ o = document.createElement('div'); o.id = 'klOv'; o.className = 'kl-ov'; document.body.appendChild(o); } o.innerHTML = '<div class="kl-box">' + html + '</div>'; return o; }
   function closeBox(){ var o = document.getElementById('klOv'); if (o) o.remove(); }
